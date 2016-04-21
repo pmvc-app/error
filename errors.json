@@ -33,5 +33,20 @@
         "message": "This email already connected with other account, please change another one",
         "field": "email",
         "url": ""
+    },
+    "2001": {
+        "message": "Json format fail",
+        "field": "command",
+        "url": ""
+    },
+    "2002": {
+        "message": "Regexp commamd not correct",
+        "field": "command",
+        "url": ""
+    },
+    "2003": {
+        "message": "Guid not found",
+        "field": "guid",
+        "url": ""
     }
 }
