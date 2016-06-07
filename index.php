@@ -1,13 +1,11 @@
 <?php
-namespace PMVC\App\Error;
+namespace PMVC\App\error;
 
 $b = new \PMVC\MappingBuilder();
 ${_INIT_CONFIG}[_CLASS] = __NAMESPACE__.'\ErrorAction';
 ${_INIT_CONFIG}[_INIT_BUILDER] = $b;
 
-$b->addAction('index', array(
-    _FUNCTION=>array(${_INIT_CONFIG}[_CLASS],'index')
-));
+$b->addAction('index', [${_INIT_CONFIG}[_CLASS],'index']);
 
 $b->addForward('error', array(
     _PATH=>'error'
