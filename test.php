@@ -25,10 +25,9 @@ class ErrorActionTest extends PHPUnit_Framework_TestCase
         $r['errors'][] = 1001;
         $result = $c->process();
         $actual = \PMVC\value($result,[0,'v','errors','0']);
-        $expected = new Error((object)[
+        $expected = new Error('1001', [
             'message'=>'Username can\'t empty, and must be at least 6 characters long',
             'field'=>'username',
-            'url'=>''
         ]);
         $this->assertEquals($expected, $actual);
     }

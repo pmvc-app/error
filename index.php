@@ -25,7 +25,7 @@ class ErrorAction extends Action
             $errorIds = $f['errors'];
             foreach ($errorIds as $id) {
                 if (!empty($defineds[$id])) {
-                    $errors[] = new Error($defineds[$id]);
+                    $errors[] = new Error($id, $defineds[$id]);
                 }
             }
         }
@@ -40,9 +40,11 @@ class Error
     public $message;
     public $field; 
     public $forward;
+    public $id;
 
-    function __construct($data)
+    function __construct($id, $data)
     {
+        $this->id = $id;
         $this->message = \PMVC\value($data,['message']);
         $this->field = \PMVC\value($data,['field']);
         $this->forward = \PMVC\value($data,['forward']);
