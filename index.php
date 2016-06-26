@@ -1,7 +1,10 @@
 <?php
 namespace PMVC\App\error;
 
-$b = new \PMVC\MappingBuilder();
+use PMVC\MappingBuilder;
+use PMVC\Action;
+
+$b = new MappingBuilder();
 ${_INIT_CONFIG}[_CLASS] = __NAMESPACE__.'\ErrorAction';
 ${_INIT_CONFIG}[_INIT_BUILDER] = $b;
 
@@ -12,16 +15,17 @@ $b->addForward('error', array(
     ,_TYPE=>'view'
 ));
 
-class ErrorAction extends \PMVC\Action
+class ErrorAction extends Action
 {
     static function index($m, $f){
-        $defineds = \PMVC\fromJson(file_get_contents(__DIR__.'/errors.json'));
+        $dotenv = \PMVC\plug('dotenv');
+        $defineds = $dotenv->getUnderscoreToArray(__DIR__.'/.env.errors');
         $errors = array();
         if (isset($f['errors'])) {
             $errorIds = $f['errors'];
             foreach ($errorIds as $id) {
-                if (!empty($defineds->{$id})) {
-                    $errors[] = new Error($defineds->{$id});
+                if (!empty($defineds[$id])) {
+                    $errors[] = new Error($defineds[$id]);
                 }
             }
         }
@@ -35,13 +39,13 @@ class Error
 {
     public $message;
     public $field; 
-    public $url;
+    public $forward;
 
     function __construct($data)
     {
-        $this->message = $data->message;
-        $this->field = $data->field;
-        $this->url = $data->url;
+        $this->message = \PMVC\value($data,['message']);
+        $this->field = \PMVC\value($data,['field']);
+        $this->forward = \PMVC\value($data,['forward']);
     }
 }
 
