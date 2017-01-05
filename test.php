@@ -20,7 +20,7 @@ class ErrorActionTest extends PHPUnit_Framework_TestCase
         );
         $c = \PMVC\plug('controller');
         $c->setApp('error');
-        $c->plugApp(['./']);
+        $c->plugApp(['../']);
         $r = $c->getRequest();
         $r['errors'][] = 1001;
         $result = $c->process();
