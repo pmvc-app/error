@@ -8,12 +8,12 @@ $b = new MappingBuilder();
 ${_INIT_CONFIG}[_CLASS] = __NAMESPACE__.'\ErrorAction';
 ${_INIT_CONFIG}[_INIT_BUILDER] = $b;
 
-$b->addAction('index', [${_INIT_CONFIG}[_CLASS],'index']);
+$b->addAction('index');
 
-$b->addForward('error', array(
+$b->addForward('error', [ 
     _PATH=>'error'
     ,_TYPE=>'view'
-));
+]);
 
 class ErrorAction extends Action
 {
