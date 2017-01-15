@@ -20,7 +20,7 @@ class ErrorAction extends Action
     static function index($m, $f){
         $dotenv = \PMVC\plug('dotenv');
         $defineds = $dotenv->getUnderscoreToArray(__DIR__.'/.env.errors');
-        $errors = array();
+        $errors = [];
         if (isset($f['errors'])) {
             $errorIds = $f['errors'];
             foreach ($errorIds as $id) {
