@@ -25,12 +25,18 @@ class ErrorAction extends Action
             $errorIds = $f['errors'];
             foreach ($errorIds as $id) {
                 if (!empty($defineds[$id])) {
+                    if (isset($defineds[$id]['http']))
+                    {
+                        \PMVC\option('set', 'httpResponseCode', $defineds[$id]['http']);
+                    }
                     $errors[] = new Error($id, $defineds[$id]);
                 }
             }
         }
         $go = $m['error'];
-        $go->set('errors',$errors);
+        $go->set('data',[
+            'errors'=>$errors
+        ]);
         return $go;
     }
 }
@@ -45,13 +51,9 @@ class Error
     function __construct($id, $data)
     {
         $this->id = $id;
-        $this->message = \PMVC\value($data,['message']);
-        $this->field = \PMVC\value($data,['field']);
-        $this->forward = \PMVC\value($data,['forward']);
+        $this->message = \PMVC\get($data, 'message');
+        $this->field = \PMVC\get($data, 'field');
+        $this->forward = \PMVC\get($data, 'forward');
     }
 }
-
-
-
-
 
