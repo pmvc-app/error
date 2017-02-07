@@ -22,9 +22,12 @@ class ErrorActionTest extends PHPUnit_Framework_TestCase
         $c->setApp('error');
         $c->plugApp(['../']);
         $r = $c->getRequest();
-        $r['errors'][] = 1001;
+        $r['errors'] = ['1001'];
         $result = $c->process();
-        $actual = \PMVC\value($result,[0,'v','errors','0']);
+        $actual = \PMVC\value($view->get('data'), [
+            'errors',
+            0 
+        ]);
         $expected = new Error('1001', [
             'message'=>'Username can\'t empty, and must be at least 6 characters long',
             'field'=>'username',
