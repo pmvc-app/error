@@ -1,4 +1,5 @@
 <?php
+
 namespace PMVC\App\error;
 
 use PMVC\MappingBuilder;
@@ -45,7 +46,6 @@ class Error
 {
     public $message;
     public $field; 
-    public $forward;
     public $id;
 
     function __construct($id, $data)
@@ -53,7 +53,6 @@ class Error
         $this->id = $id;
         $this->message = \PMVC\get($data, 'message');
         $this->field = \PMVC\get($data, 'field');
-        $this->forward = \PMVC\get($data, 'forward');
     }
 }
 
