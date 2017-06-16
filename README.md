@@ -4,8 +4,13 @@
 [![License](https://poser.pugx.org/pmvc-app/error/license)](https://packagist.org/packages/pmvc-app/error)
 [![Total Downloads](https://poser.pugx.org/pmvc-app/error/downloads)](https://packagist.org/packages/pmvc-app/error) 
 
-# PMVC Error Handle Share App 
-===============
+PMVC Error Handle Share App 
+===
+
+## Error Sample Link
+```
+/error?errors[0]=1001&errors[1]=1002&lastError=1002
+```
 
 ## Install with Composer
 ### 1. Download composer
