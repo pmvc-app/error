@@ -22,21 +22,28 @@ class ErrorAction extends Action
         $dotenv = \PMVC\plug('dotenv');
         $defineds = $dotenv->getUnderscoreToArray(__DIR__.'/.env.errors');
         $errors = [];
+        $hasLastError = false;
         if (isset($f['errors'])) {
             $errorIds = $f['errors'];
+            $lastError = $f['lastError'];
             foreach ($errorIds as $id) {
                 if (!empty($defineds[$id])) {
                     if (isset($defineds[$id]['http']))
                     {
                         \PMVC\option('set', 'httpResponseCode', $defineds[$id]['http']);
                     }
-                    $errors[] = new Error($id, $defineds[$id]);
+                    $errorObject = new Error($id, $defineds[$id]);
+                    $errors[] = $errorObject;
+                    if ($lastError === $id) {
+                        $hasLastError = $errorObject; 
+                    }
                 }
             }
         }
         $go = $m['error'];
         $go->set('data',[
-            'errors'=>$errors
+            'errors'   => $errors,
+            'lastError'=> $hasLastError
         ]);
         return $go;
     }
